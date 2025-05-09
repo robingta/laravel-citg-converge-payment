@@ -1,6 +1,6 @@
 <?php
 
-namespace CITG\ConvergePay\Services;
+namespace CITG\ConvergePayment\Services;
 
 class ResponseParseService
 {

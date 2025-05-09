@@ -1,8 +1,8 @@
 <?php
 
-namespace CITG\ConvergePay;
+namespace CITG\ConvergePayment;
 
-use CITG\ConvergePay\Services\ConvergeService;
+use CITG\ConvergePayment\Services\ConvergeService;
 use Illuminate\Support\Facades\Facade;
 
 class ConvergePaymentManager extends Facade

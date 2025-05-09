@@ -1,24 +1,33 @@
 <?php
 
-namespace CITG\ConvergePay\Services;
+namespace CITG\ConvergePayment\Services;
 
-use CITG\ConvergePay\Enums\TransactionTypes;
+use CITG\ConvergePayment\Enums\TransactionTypes;
+use CITG\ConvergePayment\Misc\CreditCard;
+use CITG\ConvergePayment\Misc\Customer;
+use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
-class ConvergeService
+class ConvergePaymentService
 {
-    private $merchantID;
+    private string $merchantID;
 
-    private $userID;
+    private string $userID;
 
-    private $pin;
+    private string $pin;
 
-    private $endpoint;
+    private string $endpoint;
 
-    private $transactionType;
+    private string $transactionType;
 
-    private $response = [];
+    private ?CreditCard $creditCard = null;
+
+    private ?Customer $customer = null;
+
+    private float $amount = 0.0;
+
+    private array $response = [];
 
     public function __construct()
     {
@@ -65,8 +74,42 @@ class ConvergeService
         return $this;
     }
 
-    public function processPayment(array $parameters): static
+    public function setCreditCard(CreditCard $creditCard): static
     {
+        $this->creditCard = $creditCard;
+
+        return $this;
+    }
+
+    public function setCustomer(Customer $customer): static
+    {
+        $this->customer = $customer;
+
+        return $this;
+    }
+
+    public function setAmount(float $amount): static
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function processPayment(array $additionalParameters = []): static
+    {
+
+        if (is_null($this->creditCard)) {
+            throw new Exception('Credit card information is required.');
+        }
+
+        if (is_null($this->customer)) {
+            throw new Exception('Customer information is required.');
+        }
+
+        if ($this->amount <= 0) {
+            throw new Exception('Amount must be greater than zero.');
+        }
+
         $payload = Arr::collapse([
             [
                 'ssl_merchant_id' => $this->merchantID,
@@ -75,8 +118,11 @@ class ConvergeService
                 'ssl_transaction_type' => $this->transactionType,
                 'ssl_show_form' => 'false',
                 'ssl_result_format' => 'ascii',
+                'ssl_amount' => $this->amount
             ],
-            $parameters,
+            $this->creditCard->toArray(),
+            $this->customer->toArray(),
+            $additionalParameters,
         ]);
         
         $response = Http::asForm()->post($this->endpoint, $payload);
@@ -91,7 +137,7 @@ class ConvergeService
     {
         return $this->response;
     }
-    
+
     public function isSuccessful(): bool
     {
         return $this->response['success'];

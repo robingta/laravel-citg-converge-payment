@@ -1,5 +1,5 @@
 {
-    "name": "citg/laravel-converge-pay",
+    "name": "citg/laravel-converge-payment",
     "description": "Laravel Library for Converge Payment Gateway",
     "type": "library",
     "license": "MIT",
@@ -22,13 +22,13 @@
     },
     "autoload": {
         "psr-4": {
-            "CITG\\ConvergePay\\": "src/"
+            "CITG\\ConvergePayment\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "CITG\\ConvergePay\\ConvergePayServiceProvider"
+                "CITG\\ConvergePay\\ConvergePaymentServiceProvider"
             ]
         }
     },

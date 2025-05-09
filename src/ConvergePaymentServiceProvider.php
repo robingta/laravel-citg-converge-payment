@@ -1,10 +1,10 @@
 <?php
 
-namespace CITG\ConvergePay;
+namespace CITG\ConvergePayment;
 
 use Illuminate\Support\ServiceProvider;
 
-class ConvergePayServiceProvider extends ServiceProvider
+class ConvergePaymentServiceProvider extends ServiceProvider
 {
     public function boot()
     {

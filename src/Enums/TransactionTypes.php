@@ -1,6 +1,6 @@
 <?php
 
-namespace CITG\ConvergePay\Enums;
+namespace CITG\ConvergePayment\Enums;
 
 enum TransactionTypes: string
 {
