@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     'merchant_id' => env('CONVERGE_ID', ''),

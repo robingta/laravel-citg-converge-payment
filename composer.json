@@ -3,11 +3,18 @@
     "description": "Laravel Library for Converge Payment Gateway",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "laravel",
+        "converge",
+        "payment",
+        "gateway"
+    ],
     "minimum-stability": "dev",
     "authors": [
         {
             "name": "Robin Khan",
-            "email": "robin@primtechs.com"
+            "email": "robin@primtechs.com",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -16,10 +23,7 @@
     "autoload": {
         "psr-4": {
             "CITG\\ConvergePay\\": "src/"
-        },
-        "files": [
-            "src/helper/converge_pay.php"
-        ]
+        }
     },
     "extra": {
         "laravel": {
@@ -27,5 +31,8 @@
                 "CITG\\ConvergePay\\ConvergePayServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "laravel/pint": "dev-main"
     }
 }
