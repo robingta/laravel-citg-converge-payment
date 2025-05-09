@@ -17,7 +17,7 @@ class Customer
     private $zip;
 
 
-    public function __construct($customerCode, $customerNumber, $firstName, $lastName, $email, $phone, $address, $city, $state, $zip)
+    private function __construct($customerCode, $customerNumber, $firstName, $lastName, $email, $phone, $address, $city, $state, $zip)
     {
         $this->customerCode = $customerCode;
         $this->customerNumber = $customerNumber;
@@ -29,6 +29,11 @@ class Customer
         $this->city = $city;
         $this->state = $state;
         $this->zip = $zip;
+    }
+
+    public static function make($customerCode, $customerNumber, $firstName, $lastName, $email, $phone, $address, $city, $state, $zip)
+    {
+        return new static($customerCode, $customerNumber, $firstName, $lastName, $email, $phone, $address, $city, $state, $zip);
     }
 
     public function toArray()
