@@ -38,15 +38,16 @@ class ConvergeService
     {
         $payload = Arr::collapse([
             [
-                'merchantID' => $this->merchantID,
-                'userID' => $this->userID,
-                'pin' => $this->pin,
-                'transactionType' => $this->transactionType,
+                'ssl_merchant_id' => $this->merchantID,
+                'ssl_user_id' => $this->userID,
+                'ssl_pin' => $this->pin,
+                'ssl_transaction_type' => $this->transactionType,
                 'ssl_show_form' => 'false',
                 'ssl_result_format' => 'ascii',
             ],
             $parameters,
         ]);
+        
         $response = Http::asForm()->post($this->endpoint, $payload);
 
         $responseBody = $response->body();
