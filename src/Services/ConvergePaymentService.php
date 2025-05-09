@@ -142,4 +142,9 @@ class ConvergePaymentService
     {
         return $this->response['success'];
     }
+
+    public function errorMessage(): string
+    {
+        return $this->response['errorMessage'] ?? '';
+    }
 }
