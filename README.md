@@ -2,7 +2,7 @@
 
 ## Compatibility
 
-This package will work with PHP >= 5.5 with CURL enabled.
+This package will work with PHP >= 8.2 with CURL enabled.
 
 ## Installation
 
