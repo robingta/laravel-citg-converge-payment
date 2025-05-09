@@ -18,6 +18,8 @@ class ConvergeService
 
     private $transactionType;
 
+    private $response = [];
+
     public function __construct()
     {
         $this->merchantID = config('converge-pay.merchant_id');
@@ -27,6 +29,35 @@ class ConvergeService
         $this->transactionType = TransactionTypes::CC_SALE->value; // Default transaction type
     }
 
+
+    public function setMerchantID($merchantID): static
+    {
+        $this->merchantID = $merchantID;
+
+        return $this;
+    }
+
+    public function setUserID($userID): static
+    {
+        $this->userID = $userID;
+
+        return $this;
+    }
+
+    public function setPin($pin): static
+    {
+        $this->pin = $pin;
+
+        return $this;
+    }
+
+    public function setEndpoint($endpoint): static
+    {
+        $this->endpoint = $endpoint;
+
+        return $this;
+    }
+
     public function setTransactionType(TransactionTypes $transactionType): static
     {
         $this->transactionType = $transactionType->value;
@@ -34,7 +65,7 @@ class ConvergeService
         return $this;
     }
 
-    public function send(array $parameters): array
+    public function processPayment(array $parameters): static
     {
         $payload = Arr::collapse([
             [
@@ -52,6 +83,17 @@ class ConvergeService
 
         $responseBody = $response->body();
 
-        return ResponseParseService::parse($responseBody);
+        $this->response = ResponseParseService::parse($responseBody);
+        return $this;
+    }
+
+    public function paymentResponse(): array
+    {
+        return $this->response;
+    }
+    
+    public function isSuccessful(): bool
+    {
+        return $this->response['success'];
     }
 }
