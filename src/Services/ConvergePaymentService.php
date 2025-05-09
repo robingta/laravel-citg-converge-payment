@@ -38,7 +38,6 @@ class ConvergePaymentService
         $this->transactionType = TransactionTypes::CC_SALE->value; // Default transaction type
     }
 
-
     public function setMerchantID($merchantID): static
     {
         $this->merchantID = $merchantID;
@@ -118,18 +117,19 @@ class ConvergePaymentService
                 'ssl_transaction_type' => $this->transactionType,
                 'ssl_show_form' => 'false',
                 'ssl_result_format' => 'ascii',
-                'ssl_amount' => $this->amount
+                'ssl_amount' => $this->amount,
             ],
             $this->creditCard->toArray(),
             $this->customer->toArray(),
             $additionalParameters,
         ]);
-        
+
         $response = Http::asForm()->post($this->endpoint, $payload);
 
         $responseBody = $response->body();
 
         $this->response = ResponseParseService::parse($responseBody);
+
         return $this;
     }
 

@@ -2,13 +2,13 @@
 
 namespace CITG\ConvergePayment\Misc;
 
-
 class CreditCard
 {
     private $creditCardNumber;
-    private $expirationDate;
-    private $cvv;
 
+    private $expirationDate;
+
+    private $cvv;
 
     private function __construct($creditCardNumber, $expirationDate, $cvv)
     {
@@ -17,7 +17,8 @@ class CreditCard
         $this->cvv = $cvv;
     }
 
-    public static function make($creditCardNumber, $expirationDate, $cvv){
+    public static function make($creditCardNumber, $expirationDate, $cvv)
+    {
         return new static($creditCardNumber, $expirationDate, $cvv);
     }
 
@@ -29,5 +30,4 @@ class CreditCard
             'ssl_cvv2cvc2' => $this->cvv,
         ];
     }
-
 }

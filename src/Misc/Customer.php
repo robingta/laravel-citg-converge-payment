@@ -2,20 +2,27 @@
 
 namespace CITG\ConvergePayment\Misc;
 
-
 class Customer
 {
     private $customerCode;
-    private $customerNumber;
-    private $firstName;
-    private $lastName;
-    private $email;
-    private $phone;
-    private $address;
-    private $city;
-    private $state;
-    private $zip;
 
+    private $customerNumber;
+
+    private $firstName;
+
+    private $lastName;
+
+    private $email;
+
+    private $phone;
+
+    private $address;
+
+    private $city;
+
+    private $state;
+
+    private $zip;
 
     private function __construct($customerCode, $customerNumber, $firstName, $lastName, $email, $phone, $address, $city, $state, $zip)
     {
@@ -51,5 +58,4 @@ class Customer
             'ssl_avs_zip' => $this->zip,
         ];
     }
-
 }
