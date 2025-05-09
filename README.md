@@ -18,7 +18,7 @@ To install this library follow the following steps:
 ``` php
 php artisan vendor:publish --provider="CITG\ConvergePayment\ConvergePaymentServiceProvider"
 ```
-
+``` php
 <?php
 
 return [
@@ -27,6 +27,7 @@ return [
     'pin' => env('CONVERGE_PIN', ''),
     'endpoint' => env('CONVERGE_ENDPOINT', 'https://api.demo.convergepay.com/VirtualMerchantDemo/process.do'),
 ];
+```
 
 **Please Note: When you are deploying this application to live. You have to change the `endpoint` **
 
@@ -43,26 +44,26 @@ return [
 ## All Transaction Types
 
 
-```
-    *TransactionTypes::CC_AUTH_ONLY
-    *TransactionTypes::CC_AVS_ONLY
-    *TransactionTypes::CC_SALE
-    *TransactionTypes::CC_VERIFY
-    *TransactionTypes::CC_GET_TOKEN
-    *TransactionTypes::CC_CREDIT
-    *TransactionTypes::CC_FORCE
-    *TransactionTypes::CC_BAL_INQUIRY
-    *TransactionTypes::CC_RETURN
-    *TransactionTypes::CC_VOID
-    *TransactionTypes::CC_COMPLETE
-    *TransactionTypes::CC_DELETE
-    *TransactionTypes::CC_UPDATE_TIP
-    *TransactionTypes::CC_SIGNATURE
-    *TransactionTypes::CC_ADD_RECURRING
-    *TransactionTypes::CC_ADD_INSTALL
-    *TransactionTypes::CC_UPDATE_TOKEN
-    *TransactionTypes::CC_DELETE_TOKEN
-    *TransactionTypes::CC_QUERY_TOKEN
+```php
+    TransactionTypes::CC_AUTH_ONLY
+    TransactionTypes::CC_AVS_ONLY
+    TransactionTypes::CC_SALE
+    TransactionTypes::CC_VERIFY
+    TransactionTypes::CC_GET_TOKEN
+    TransactionTypes::CC_CREDIT
+    TransactionTypes::CC_FORCE
+    TransactionTypes::CC_BAL_INQUIRY
+    TransactionTypes::CC_RETURN
+    TransactionTypes::CC_VOID
+    TransactionTypes::CC_COMPLETE
+    TransactionTypes::CC_DELETE
+    TransactionTypes::CC_UPDATE_TIP
+    TransactionTypes::CC_SIGNATURE
+    TransactionTypes::CC_ADD_RECURRING
+    TransactionTypes::CC_ADD_INSTALL
+    TransactionTypes::CC_UPDATE_TOKEN
+    TransactionTypes::CC_DELETE_TOKEN
+    TransactionTypes::CC_QUERY_TOKEN
 ```
 
 ## Create a Customer
