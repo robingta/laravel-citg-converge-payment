@@ -9,12 +9,12 @@ class ConvergePaymentServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/config/converge-pay.php' => config_path('converge-pay.php'),
+            __DIR__.'/config/converge-payment.php' => config_path('converge-payment.php'),
         ]);
     }
 
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/config/converge-pay.php', 'converge-pay');
+        $this->mergeConfigFrom(__DIR__.'/config/converge-payment.php', 'converge-payment');
     }
 }
