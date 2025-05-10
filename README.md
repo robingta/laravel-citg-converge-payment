@@ -107,6 +107,8 @@ return [
 
 ```php
 use CITG\ConvergePayment\Enums\TransactionTypes;
+```
+```php
 use CITG\ConvergePayment\ConvergePaymentManager;
 ```
 
@@ -122,7 +124,7 @@ use CITG\ConvergePayment\ConvergePaymentManager;
 
 ## Available Methods
 
-Here is a function description table for the main public methods in `ConvergePaymentService`. You can add this to your README.md for quick reference:
+Here is a function description table for the main public methods in `ConvergePaymentService`:
 
 | Method | Description | Parameters | Returns |
 |--------|-------------|------------|---------|
