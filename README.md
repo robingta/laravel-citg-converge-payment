@@ -7,7 +7,9 @@ This package will work with PHP >= 8.2 with CURL enabled.
 ## Installation
 
 To install this library follow the following steps:
-* **composer require citg/laravel-converge-payment**
+```bash
+ composer require citg/laravel-converge-payment
+```
 
 
 
