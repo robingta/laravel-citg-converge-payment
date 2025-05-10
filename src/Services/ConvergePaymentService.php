@@ -31,10 +31,10 @@ class ConvergePaymentService
 
     public function __construct()
     {
-        $this->merchantID = config('converge-pay.merchant_id');
-        $this->userID = config('converge-pay.user_id');
-        $this->pin = config('converge-pay.pin');
-        $this->endpoint = config('converge-pay.endpoint');
+        $this->merchantID = config('converge-payment.merchant_id');
+        $this->userID = config('converge-payment.user_id');
+        $this->pin = config('converge-payment.pin');
+        $this->endpoint = config('converge-payment.endpoint');
         $this->transactionType = TransactionTypes::CC_SALE->value; // Default transaction type
     }
 
