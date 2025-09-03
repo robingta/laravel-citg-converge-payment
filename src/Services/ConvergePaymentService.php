@@ -143,6 +143,14 @@ class ConvergePaymentService
         return $this->response['success'];
     }
 
+    public function isSuccessfulTransaction(): bool
+    {
+        $approvalCode = trim($this->response['ssl_approval_code'] ?? '');
+        $avsResponse = trim($this->response['ssl_avs_response'] ?? '');
+
+        return !empty($approvalCode) && $avsResponse === 'A';
+    }
+
     public function errorMessage(): string
     {
         return $this->response['errorMessage'] ?? '';
