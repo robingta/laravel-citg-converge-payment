@@ -23,4 +23,6 @@ enum TransactionTypes: string
     case CC_UPDATE_TOKEN = 'ccupdatetoken';
     case CC_DELETE_TOKEN = 'ccdeletetoken';
     case CC_QUERY_TOKEN = 'ccquerytoken';
+    
+    case TX_TRANSACTION_QUERY= 'txnquery';
 }

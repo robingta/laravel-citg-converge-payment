@@ -9,17 +9,8 @@ use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
-class ConvergePaymentService
+class ConvergePaymentService extends ConvergeService
 {
-    private string $merchantID;
-
-    private string $userID;
-
-    private string $pin;
-
-    private string $endpoint;
-
-    private string $transactionType;
 
     private ?CreditCard $creditCard = null;
 
@@ -29,48 +20,12 @@ class ConvergePaymentService
 
     private array $response = [];
 
+    private $fallbackErrorMessage = '';
+
     public function __construct()
     {
-        $this->merchantID = config('converge-payment.merchant_id');
-        $this->userID = config('converge-payment.user_id');
-        $this->pin = config('converge-payment.pin');
-        $this->endpoint = config('converge-payment.endpoint');
-        $this->transactionType = TransactionTypes::CC_SALE->value; // Default transaction type
-    }
-
-    public function setMerchantID($merchantID): static
-    {
-        $this->merchantID = $merchantID;
-
-        return $this;
-    }
-
-    public function setUserID($userID): static
-    {
-        $this->userID = $userID;
-
-        return $this;
-    }
-
-    public function setPin($pin): static
-    {
-        $this->pin = $pin;
-
-        return $this;
-    }
-
-    public function setEndpoint($endpoint): static
-    {
-        $this->endpoint = $endpoint;
-
-        return $this;
-    }
-
-    public function setTransactionType(TransactionTypes $transactionType): static
-    {
-        $this->transactionType = $transactionType->value;
-
-        return $this;
+        parent::__construct();
+        $this->setTransactionType(TransactionTypes::CC_SALE); // Default transaction type
     }
 
     public function setCreditCard(CreditCard $creditCard): static
@@ -90,6 +45,13 @@ class ConvergePaymentService
     public function setAmount(float $amount): static
     {
         $this->amount = $amount;
+
+        return $this;
+    }
+
+    public function setErrorMessage(string $fallbackErrorMessage): static
+    {
+        $this->fallbackErrorMessage = $fallbackErrorMessage;
 
         return $this;
     }
@@ -145,7 +107,7 @@ class ConvergePaymentService
 
     public function errorMessage(): string
     {
-        return $this->response['errorMessage'] ?? "Transaction was not approved. Please contact NSAA.[{$this->response['ssl_result_message']}]";
+        return $this->response['errorMessage'] ?? "{$this->fallbackErrorMessage} [{$this->response['ssl_result_message']}]";
     }
     
 }
