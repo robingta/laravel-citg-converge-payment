@@ -140,19 +140,12 @@ class ConvergePaymentService
 
     public function isSuccessful(): bool
     {
-        return $this->response['success'];
-    }
-
-    public function isSuccessfulTransaction(): bool
-    {
-        $approvalCode = trim($this->response['ssl_approval_code'] ?? '');
-        $avsResponse = trim($this->response['ssl_avs_response'] ?? '');
-
-        return !empty($approvalCode) && $avsResponse === 'A';
+        return ! isset($this->response['errorCode']) && $this->response['ssl_result_message'] === 'APPROVAL' && $this->response['ssl_approval_code'] !== '';
     }
 
     public function errorMessage(): string
     {
-        return $this->response['errorMessage'] ?? '';
+        return $this->response['errorMessage'] ?? "Transaction was not approved. Please contact NSAA.[{$this->response['ssl_result_message']}]";
     }
+    
 }

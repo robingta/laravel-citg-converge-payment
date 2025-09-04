@@ -139,7 +139,6 @@ Here is a function description table for the main public methods in `ConvergePay
 | `processPayment(array $additionalParameters = [])` | Process the payment with the provided details. with an parameter of type array to send additional parameters | `array $additionalParameters` | `static` |
 | `paymentResponse()` | Get the parsed response from the payment gateway. | None | `array` |
 | `isSuccessful()` | Check if the request was successful. | None | `bool` |
-| `isSuccessfulTransaction()` | Check if the payment was successful. | None | `bool` |
 | `errorMessage()` | Get the error message from the response, if any. | None | `string` |
 
 ```php

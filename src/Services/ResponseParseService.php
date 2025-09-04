@@ -14,7 +14,6 @@ class ResponseParseService
             $response[trim($key)] = trim($value);
         }
 
-        $response['success'] = ! isset($response['errorCode']);
 
         return $response;
     }
