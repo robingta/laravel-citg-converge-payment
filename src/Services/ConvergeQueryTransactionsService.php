@@ -63,5 +63,10 @@ class ConvergeQueryTransactionsService extends ConvergeService
     {
         return $this->response['ssl_txn_count'] != '0';
     }
+
+    public function isPaymentComplete(): bool
+    {
+        return $this->response['ssl_result_message'] === 'APPROVAL' && $this->response['ssl_approval_code'] !== '';
+    }
     
 }

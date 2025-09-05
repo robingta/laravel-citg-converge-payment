@@ -20,9 +20,6 @@ class ResponseParseService
             $response[trim($key)] = trim($value);
         }
 
-        dd($response);
-
-
         return $response;
     }
 }

@@ -71,6 +71,10 @@ class ConvergePaymentService extends ConvergeService
             throw new Exception('Amount must be greater than zero.');
         }
 
+        if($this->transactionType === TransactionTypes::TX_TRANSACTION_QUERY->value) {
+            throw new Exception('Transaction type TX_TRANSACTION_QUERY is not allowed for payment processing.');
+        }
+
         $payload = Arr::collapse([
             [
                 'ssl_merchant_id' => $this->merchantID,

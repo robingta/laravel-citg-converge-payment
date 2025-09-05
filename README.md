@@ -192,21 +192,19 @@ Here is a function description table for the main public methods in `ConvergePay
 | `setTransactionType(TransactionTypes $transactionType)` | Set the transaction type (see TransactionTypes enum). | `TransactionTypes $transactionType` | `static` |
 | `query(array $queryParameters)` | Search transactions | `array $queryParameters` | `array` |
 | `isSuccessful()` | Check if the request was successful. | None | `bool` |
-| `errorMessage()` | Get the error message from the response, if any. | None | `string` |
+| `isPaymentComplete()()` | Check if the payment was successful. | None | `bool` |
+| `queryResponse()` | Get the query response. | None | `string` |
 
 ```php
-    $paymentManager->setMerchantID($merchantID);
-    $paymentManager->setUserID($userID);
-    $paymentManager->setPin($pin);
-    $paymentManager->setEndpoint($endpoint);
-    $paymentManager->setTransactionType(TransactionTypes::CC_SALE);
-    $paymentManager->setCreditCard($creditCard);
-    $paymentManager->setCustomer($customer);
-    $paymentManager->setAmount(30.00);
-    $paymentManager->processPayment([
-        'description' => 'Payment for order #123'
+    $queryManager->setMerchantID($merchantID);
+    $queryManager->setUserID($userID);
+    $queryManager->setPin($pin);
+    $queryManager->setEndpoint($endpoint);
+    $paymentManager->setTransactionType(TransactionTypes::TX_TRANSACTION_QUERY);
+    $paymentManager->query([
+        'ssl_invoice_number' => 'XXX'
     ]);
-    $response = $paymentManager->paymentResponse();
-    $success = $paymentManager->isSuccessful();
-    $error = $paymentManager->errorMessage();
+    $success = $queryManager->isSuccessful();
+    $success = $queryManager->isPaymentComplete();
+    $response = $queryManager->queryResponse();
 ```
