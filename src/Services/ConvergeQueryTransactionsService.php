@@ -3,6 +3,7 @@
 namespace CITG\ConvergePayment\Services;
 
 use CITG\ConvergePayment\Enums\TransactionTypes;
+use CITG\ConvergePayment\Parsers\QueryResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Exception;
@@ -35,7 +36,7 @@ class ConvergeQueryTransactionsService extends ConvergeService
                 'ssl_merchant_id' => $this->merchantID,
                 'ssl_user_id' => $this->userID,
                 'ssl_pin' => $this->pin,
-                'ssl_transaction_type' => $this->transactionType,
+                'ssl_transaction_type' => 'txnquery',
                 'ssl_show_form' => 'false',
                 'ssl_result_format' => 'ascii',
             ],
@@ -49,7 +50,8 @@ class ConvergeQueryTransactionsService extends ConvergeService
 
 
 
-        $this->response = ResponseParseService::parse($responseBody);
+        $this->response = QueryResponse::parse($responseBody);
+
 
         return $this;
     }
@@ -59,14 +61,17 @@ class ConvergeQueryTransactionsService extends ConvergeService
         return $this->response;
     }
 
-    public function isSuccessful(): bool
+    public function hasApprovedTransaction(): mixed
     {
-        return $this->response['ssl_txn_count'] != '0';
+        if($this->response['ssl_txn_count'] > 0) {
+            foreach($this->response['transactions'] as $transaction) {
+                if($transaction['ssl_result_message'] == 'APPROVAL' && isset($transaction['ssl_approval_code']) && $transaction['ssl_approval_code'] !== '') {
+                    return $transaction;
+                }
+            }
+        }
+        return null;
     }
 
-    public function isPaymentComplete(): bool
-    {
-        return $this->response['ssl_result_message'] === 'APPROVAL' && $this->response['ssl_approval_code'] !== '';
-    }
     
 }

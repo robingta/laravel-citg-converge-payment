@@ -8,6 +8,7 @@ use CITG\ConvergePayment\Misc\Customer;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
+use CITG\ConvergePayment\Parsers\PaymentResponse;
 
 class ConvergePaymentService extends ConvergeService
 {
@@ -94,7 +95,7 @@ class ConvergePaymentService extends ConvergeService
 
         $responseBody = $response->body();
 
-        $this->response = ResponseParseService::parse($responseBody);
+        $this->response = PaymentResponse::parse($responseBody);
 
         return $this;
     }

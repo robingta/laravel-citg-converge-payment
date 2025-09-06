@@ -15,7 +15,7 @@ class ConvergeQueryManager extends Facade
      * @method public function setTransactionType(TransactionTypes $transactionType): static
      * @method public function query(array $parameters = []): static
      * @method public function querytResponse(): array
-     * @method public function isSuccessful(): bool
+     * @method public function hasApprovedTransaction(): bool
      *
      * @see CITG\ConvergePay\Enums\TransactionTypes
      * @see CITG\ConvergePay\Services\ConvergeService

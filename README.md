@@ -191,8 +191,7 @@ Here is a function description table for the main public methods in `ConvergePay
 | `setEndpoint($endpoint)` | Set the API endpoint URL. | `string $endpoint` | `static` |
 | `setTransactionType(TransactionTypes $transactionType)` | Set the transaction type (see TransactionTypes enum). | `TransactionTypes $transactionType` | `static` |
 | `query(array $queryParameters)` | Search transactions | `array $queryParameters` | `array` |
-| `isSuccessful()` | Check if the request was successful. | None | `bool` |
-| `isPaymentComplete()()` | Check if the payment was successful. | None | `bool` |
+| `hasApprovedTransaction()` | Check if there was any approved transaction | None | `mixed` |
 | `queryResponse()` | Get the query response. | None | `string` |
 
 ```php
@@ -204,7 +203,6 @@ Here is a function description table for the main public methods in `ConvergePay
     $paymentManager->query([
         'ssl_invoice_number' => 'XXX'
     ]);
-    $success = $queryManager->isSuccessful();
-    $success = $queryManager->isPaymentComplete();
     $response = $queryManager->queryResponse();
+    $transaction = $queryManager->hasApprovedTransaction();
 ```
