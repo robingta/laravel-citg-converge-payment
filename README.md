@@ -206,3 +206,9 @@ Here is a function description table for the main public methods in `ConvergePay
     $response = $queryManager->queryResponse();
     $transaction = $queryManager->hasApprovedTransaction();
 ```
+
+
+### Imprtant LINKS:
+
+1 . https://developer.elavon.com/products/xml-api/v1/transaction-management
+2. https://developers.bluefin.com/payconex/docs/elavon
